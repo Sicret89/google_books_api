@@ -6,4 +6,18 @@
 
 <h1> Add new book into Books Collection </h1>
 
+
+<div class="forms">
+    <form method="POST">
+
+        {% csrf_token %}
+        {{form|crispy}}
+        {{ form.date }}
+
+        <div class="button">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
 {% endblock content %}

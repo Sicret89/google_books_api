@@ -6,4 +6,16 @@
 
 <h1> You can edit your book now. </h1>
 
+<div class="forms">
+    <form method="POST">
+
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <div class="button">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
 {% endblock content %}

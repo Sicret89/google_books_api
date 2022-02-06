@@ -1,10 +1,11 @@
 from datetime import datetime
 from itertools import chain
 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .forms import BookSearchForm
+from .forms import BookAddForm, BookSearchForm
 from .models import Book
 
 
@@ -43,3 +44,34 @@ class BookListView(ListView):
             filters.append(by_publication_date_end)
         books_list = list(chain(*filters))
         return books_list
+
+
+class AddBook(SuccessMessageMixin, CreateView):
+    """
+    View responsible for adding Book objects.
+    """
+
+    model = Book
+    template_name = "books/add_book.html"
+    success_message = "Your book has been Created!"
+    form_class = BookAddForm
+
+
+class BookDetail(DetailView):
+    """
+    View responsible for displaying Book detail.
+    """
+
+    model = Book
+    template_name = "books/books_detail.html"
+
+
+class EditBook(SuccessMessageMixin, UpdateView):
+    """
+    View responsible for editing Book objects.
+    """
+
+    model = Book
+    template_name = "books/edit_book.html"
+    success_message = "Your book has been Edited!"
+    form_class = BookAddForm
