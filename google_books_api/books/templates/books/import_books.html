@@ -5,4 +5,13 @@
 
 <h1> Import books from Google </h1>
 
+<h5>Please enter title, keywords or isbn number for books that you want to import from google API.</h5>
+
+<form action="{% url 'import_books' %}" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Import books</button>
+</form>
+
+
 {% endblock %}
