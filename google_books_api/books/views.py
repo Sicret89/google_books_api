@@ -146,7 +146,6 @@ class GoogleBooksImport(View):
                                     else:
                                         book_info["image_link"] = None
                                     book, _ = Book.objects.update_or_create(**book_info)
-                                    print(book_info)
                                     book.save()
                             messages.success(request, "Your books have been imported from Google API")
                             return redirect("books_list")
