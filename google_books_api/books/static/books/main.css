@@ -1,0 +1,31 @@
+body {
+    background: white;
+    color: #333333;
+    margin-top: 5em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  .bg-steel {
+    background-color: #5f788a;
+  }
+
+  .title-link {
+    color: #005c26;
+  }
+
+  .title-link:hover {
+    font-size:105%;
+    text-decoration: none;
+  }
+
+   .media content-section {
+    border:2px
+    solid #38220f;
+   }
