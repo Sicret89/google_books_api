@@ -8,9 +8,13 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, View
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import mixins, viewsets
+from rest_framework.filters import SearchFilter
 
 from .forms import BookAddForm, BookSearchForm, ImportBooksForm
 from .models import Book
+from .serializers import BookSerializer
 
 
 class BookListView(ListView):
@@ -51,6 +55,14 @@ class BookListView(ListView):
             filters.append(by_publication_date_end)
         books_list = list(chain(*filters))
         return books_list
+
+
+class ListBookAPIView(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ["title", "author", "isbn_number", "published_date"]
+    search_fields = ["title", "author", "isbn_number", "published_date"]
 
 
 class AddBook(SuccessMessageMixin, CreateView):
