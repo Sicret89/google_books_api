@@ -16,10 +16,10 @@
                 <h5 class="mt-2 mb-2"><strong>Author: </strong>{{ object.author }}</h5>
                 <h5 class="mt-2 mb-2"><strong>Publication date: </strong>{{ object.published_date }}</h5>
                 <h5 class="mt-2 mb-2"><strong>ISBN Number: </strong>{{ object.isbn_number }}</h5>
-                <h5 class="mt-2 mb-2"><strong>Number of pages: </strong>{{ object.number_of_pages }}</h5>
+                <h5 class="mt-2 mb-2"><strong>Number of pages: </strong>{{ object.page_count }}</h5>
                 {% if book.image_link %}
-                <h5 class="mt-2 mb-2"><strong>Link to image: </strong><a href={{ object.image_link }}>{{
-                        object.image_link }}</a>
+                <h5 class="mt-2 mb-2"><strong>Link to image: </strong><a href={{ object.image_link }}
+                        target="_blank">Click here to view.</a>
                 </h5>
                 {% else %}
                 <h5 class="mt-2 mb-2"><strong>Link to image: </strong>{{ object.image_link }}</a></h5>

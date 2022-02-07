@@ -11,7 +11,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ["google-books-import.herokuapp.com"]
+ALLOWED_HOSTS = ["still-mountain-79365.herokuapp.com", "localhost"]
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOSTS")]
 
@@ -121,9 +121,8 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": "django_filters.rest_framework.DjangoFilterBackend",
 }
 
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

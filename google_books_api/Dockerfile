@@ -16,11 +16,9 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
 RUN adduser -D myuser
 USER myuser
 
 CMD gunicorn api.wsgi:application --bind 0.0.0.0:$PORT
-
-# EXPOSE 8000
-
-# CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "api.wsgi:application"]
