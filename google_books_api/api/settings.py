@@ -121,6 +121,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": "django_filters.rest_framework.DjangoFilterBackend",
 }
 
+CSRF_TRUSTED_ORIGINS = ["https://still-mountain-79365.herokuapp.com"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
