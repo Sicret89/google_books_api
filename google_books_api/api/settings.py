@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import dj_database_url
+import django_heroku
 import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,3 +127,5 @@ REST_FRAMEWORK = {
 STATIC_URL = "/static/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+django_heroku.settings(locals())
