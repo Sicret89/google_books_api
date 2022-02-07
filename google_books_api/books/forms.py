@@ -36,5 +36,8 @@ class BookAddForm(forms.ModelForm):
 
 
 class ImportBooksForm(forms.Form):
+    """
+    Form for adding books form google.
+    """
 
     query = forms.CharField(label="Enter Keywords", max_length=100, required=False)
