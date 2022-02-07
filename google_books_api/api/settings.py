@@ -1,17 +1,22 @@
 import os
 from pathlib import Path
 
+import dj_database_url
 import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
-DEBUG = str(os.environ.get("DEBUG")) == "1"  # 1 == True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = ["warm-dusk-44999.herokuapp.com"]
+ALLOWED_HOSTS.extend(
+    filter(
+        None,
+        os.environ.get("ALLOWED_HOSTS", "").split(","),
+    )
+)
 
 # Application definition
 
@@ -30,6 +35,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -69,6 +75,10 @@ DATABASES = {
     }
 }
 
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -111,7 +121,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "DEFAULT_FILTER_BACKENDS": "django_filters.rest_framework.DjangoFilterBackend",
-    "PAGE_SIZE": 10,
 }
 
 STATIC_URL = "/static/"
