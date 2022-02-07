@@ -5,7 +5,7 @@ from .models import Book
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     """
-    Serializer for Book model.
+    Serializer for REST Book model.
     """
 
     class Meta:

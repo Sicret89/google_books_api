@@ -19,7 +19,7 @@ from .serializers import BookSerializer
 
 class BookListView(ListView):
     """
-    View responsible for listing Book objects.
+    View responsible for listing and filterig Book objects.
     """
 
     model = Book
@@ -58,6 +58,10 @@ class BookListView(ListView):
 
 
 class ListBookAPIView(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    View responsible for filtering REST objects.
+    """
+
     serializer_class = BookSerializer
     queryset = Book.objects.all()
     filter_backends = [DjangoFilterBackend, SearchFilter]
