@@ -11,13 +11,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ["google-books-import.herokuapp.com"]
-ALLOWED_HOSTS.extend(
-    filter(
-        None,
-        os.environ.get("ALLOWED_HOSTS", "").split(","),
-    )
-)
+ALLOWED_HOSTS = ["warm-dusk-44999.herokuapp.com"]
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOSTS")]
+
 
 # Application definition
 
