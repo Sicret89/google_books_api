@@ -6,21 +6,32 @@
 <h1> Book List </h1>
 
 <!-- Filter form section START -->
-<form action="{% url 'books_list' %}" method="get">
-    <input name="title" type="text" placeholder="Title">
-    <input name="author" type="text" placeholder="Author">
-    <input name="publication_language" type="text" placeholder="Publication Language">
-    <input name="publication_date_start" placeholder="Publication start date" class="textbox-n" type="text"
-        onfocus="(this.type='date')">
-    <input name="publication_date_end" placeholder="Publication end date" class="textbox-n" type="text"
-        onfocus="(this.type='date')">
-    <button type="submit" class="btn btn-primary">Search</button>
+<form>
+    <div class="form-row align-items-center" action="{% url 'books_list' %}" method="get">
+        <div class="col-sm-2 my-1">
+            <input name="title" type="text" class="form-control" placeholder="Title">
+        </div>
+        <div class="col-sm-2 my-1">
+            <input name="author" type="text" class="form-control" placeholder="Author">
+        </div>
+        <div class="col-sm-2 my-1">
+            <input name="publication_language" type="text" class="form-control" placeholder="Publication Language">
+        </div>
+        <div class="col-sm-2 my-1">
+            <input name="publication_date_start" type="text" class="form-control" placeholder="Publication start date"
+                class="textbox-n" onfocus="(this.type='date')">
+        </div>
+        <div class="col-sm-2 my-1">
+            <input name="publication_date_end" type="text" class="form-control" placeholder="Publication end date"
+                class="textbox-n" onfocus="(this.type='date')">
+        </div>
+        <div class="col-sm-2 my-1">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
 </form>
-
-
 <!--Filter form section END -->
 <!--BOOKS LIST START -->
-
 <div class="table table-bordered">
     <table class="table table-striped">
         <thead>
@@ -38,14 +49,13 @@
         <tbody>
             {% for book in object_list %}
             <tr>
-                <td><a class="title-link" href="{% url 'edit_book' book.id %}">{{ book.title }}</classa>
+                <td><a class="title-link" href="{% url 'edit_book' book.id %}">{{ book.title }}</a>
                 </td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.published_date }}</td>
                 <td>{{ book.isbn_number }}</td>
                 <td>{{ book.page_count }}</td>
                 {% if book.image_link %}
-                <!-- <td><a href="{{ book.image_link }}">Book link</a></td> -->
                 <td>
                     <a href="{{ book.image_link }}" target="_blank">
                         <img src="{{ book.image_link }}" alt="">
@@ -60,21 +70,17 @@
         </tbody>
     </table>
 </div>
-
 {% else %}
 <p><b>No books are available</b></p>
 {% endif %}
-
 <!--BOOKS LIST END -->
 <!--PAGINATION START -->
-
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
         <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
-
         {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
         <a class="btn btn-info mb-3" href="?page={{ num }}">{{ num }}</a>
@@ -82,13 +88,11 @@
             href="?page={{ num }}">{{ num }}</a>
             {% endif %}
             {% endfor %}
-
             {% if page_obj.has_next %}
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
             {% endif %}
     </span>
 </div>
-
 <!--PAGINATION END -->
 {% endblock content %}
